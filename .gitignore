@@ -1,0 +1,15 @@
+# python
+__pycache__/
+*.pyc
+
+# data artifacts
+*.npy
+*.csv
+*.json
+
+# generated outputs
+results/
+
+# system
+.DS_Store
+.ipynb_checkpoints
