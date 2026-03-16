@@ -1,15 +1,33 @@
-# python
+# -------------------------
+# Python
+# -------------------------
 __pycache__/
 *.pyc
+*.pyo
+*.pyd
 
-# data artifacts
-*.npy
-*.csv
-*.json
+# -------------------------
+# Virtual environments
+# -------------------------
+.env
+.venv
+env/
+venv/
 
-# generated outputs
-results/
+# -------------------------
+# Jupyter
+# -------------------------
+.ipynb_checkpoints/
 
-# system
+# -------------------------
+# OS junk
+# -------------------------
 .DS_Store
-.ipynb_checkpoints
+Thumbs.db
+
+# -------------------------
+# Logs / temp
+# -------------------------
+*.log
+*.tmp
+*.cache
