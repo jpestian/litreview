@@ -1,0 +1,124 @@
+
+
+=== Cluster 0 ===
+
+- Explainable machine learning with bayesian hyper-optimization for predicting cognitive impairment from longitudinal nursing home data (2026)
+- Age group classification and gender detection based on forced expiratory spirometry (2015)
+- Moving toward precision PTSD treatment: predicting veterans' intensive PTSD treatment response using continuously updating machine learning models (2023)
+- Machine learning to predict adverse outcomes after cardiac surgery: A systematic review and meta-analysis (2022)
+- Systematic evaluation of machine learning algorithms for neuroanatomically-based age prediction in youth (2022)
+- Performance of different machine learning algorithms in identifying undiagnosed diabetes based on nonlaboratory parameters and the influence of muscle strength: A cross-sectional study (2024)
+- Using machine learning to determine age over 16 based on development of third molar and periodontal ligament of second molar (2023)
+- Predictive Value of Machine Learning Models in Postoperative Mortality of Older Adults Patients with Hip Fracture: A Systematic Review and Meta-analysis (2023)
+- Evaluation of a machine learning algorithms for predicting the dental age of adolescent based on different preprocessing methods (2022)
+- Machine learning improves mortality risk prediction after cardiac surgery: Systematic review and meta-analysis (2022)
+- Machine Learning Modeling for Predicting Infliximab Pharmacokinetics in Pediatric and Young Adult Patients With Crohn Disease: Leveraging Ensemble Modeling With Synthetic and Real-World Data (2026)
+- Age Estimation by Machine Learning and CT-Multiplanar Reformation of Cranial Sutures in Northern Chinese Han Adults (2024)
+- A Machine Learning-Based Model for Individualized Prediction of Vancomycin Concentration-Time Curves in ICU Patients (2026)
+- CADOES: An interactive machine-learning approach for sex estimation with the pelvis (2019)
+- A machine learning-based clinical decision support system to identify prescriptions with a high risk of medication error (2020)
+- Design of a Clinical Decision Support System for Predicting Erectile Dysfunction in Men Using NHIRD Dataset (2019)
+- Developing and maintaining clinical decision support using clinical knowledge and machine learning: the case of order sets (2018)
+- Interpretable clinical decision support systems in high-risk pregnancy: a scoping review of models, methods, and implementation (2026)
+- An Intelligent Clinical Decision Support System for Preoperative Prediction of Lymph Node Metastasis in Gastric Cancer (2019)
+- Integrating probabilistic trees and causal networks for clinical and epidemiological data (2026)
+- COVID-19 severity analysis for clinical decision support based on machine learning approach (2025)
+- INSAFEDARE Project: Innovative Applications of Assessment and Assurance of Data and Synthetic Data for Regulatory Decision Support (2024)
+- Infrastructure platform for privacy-preserving distributed machine learning development of computer-assisted theragnostics in cancer (2022)
+- Machine learning algorithms and forced oscillation measurements applied to the automatic identification of chronic obstructive pulmonary disease (2012)
+- Clinical decision support of radiotherapy treatment planning: A data-driven machine learning strategy for patient-specific dosimetric decision making (2017)
+- Predicting Malignancy in Pediatric Thyroid Nodules: Early Experience With Machine Learning for Clinical Decision Support (2021)
+- Machine-learning algorithm to predict multidisciplinary team treatment recommendations in the management of basal cell carcinoma (2022)
+- An Advanced Machine Learning Model for a Web-Based Artificial Intelligence-Based Clinical Decision Support System Application: Model Development and Validation Study (2024)
+- Preparing for the bedside-optimizing a postpartum depression risk prediction model for clinical implementation in a health system (2024)
+- Comparative Study of Fuzzy Rule-Based Classifiers for Medical Applications (2023)
+- Developing a stroke alert trigger for clinical decision support at emergency triage using machine learning (2021)
+- A machine learning based two-stage clinical decision support system for predicting patients' discontinuation from opioid use disorder treatment: retrospective observational study (2021)
+- Predicting post-discharge complications in cardiothoracic surgery: A clinical decision support system to optimize remote patient monitoring resources (2024)
+- Clinical decision support using machine learning and cardiac troponin for the diagnosis of myocardial infarction (2024)
+- Adolescent, parent, and provider attitudes toward a machine learning based clinical decision support system for selecting treatment for youth depression (2024)
+- Machine learning of physiological waveforms and electronic health record data to predict, diagnose and treat haemodynamic instability in surgical patients: protocol for a retrospective study (2019)
+- Time and temporality in machine learning methods to improve cancer clinical decision support: A literature review (2026)
+- Automated Spirometry Quality Assurance: Supervised Learning From Multiple Experts (2018)
+
+
+=== Cluster 1 ===
+
+- Is Risk-Stratifying Patients with Colorectal Cancer Using a Deep Learning-Based Prognostic Biomarker Cost-Effective? (2024)
+- GluNet: A Deep Learning Framework for Accurate Glucose Forecasting (2020)
+- Improving the Efficacy of ACR TI-RADS Through Deep Learning-Based Descriptor Augmentation (2023)
+- EvoLSTM: context-dependent models of sequence evolution using a sequence-to-sequence LSTM (2020)
+- Uncertainty-aware probabilistic graph neural networks for road-level traffic crash prediction (2024)
+- Risky Driver Recognition with Class Imbalance Data and Automated Machine Learning Framework (2021)
+- Stochastic Gradient Descent and the Prediction of MeSH for PubMed Records (2014)
+- Advances In Infection Surveillance and Clinical Decision Support With Fuzzy Sets and Fuzzy Logic (2015)
+- Natural Language Processing and Machine Learning to Enable Clinical Decision Support for Treatment of Pediatric Pneumonia (2021)
+- Using preference learning for detecting inconsistencies in clinical practice guidelines: Methods and application to antibiotherapy (2018)
+- CheXED: Comparison of a Deep Learning Model to a Clinical Decision Support System for Pneumonia in the Emergency Department (2022)
+- What is the role of large language models in the management of urolithiasis?: a review (2025)
+- Assessing Healthcare Stakeholder Understanding of Machine Learning Documentation (2025)
+- An open access medical knowledge base for community driven diagnostic decision support system development (2019)
+- On the role of the UMLS in supporting diagnosis generation proposed by Large Language Models (2024)
+- Guideline-driven clinical decision support for colonoscopy patients using the hierarchical multi-label deep learning method (2025)
+- Effectiveness of various general large language models in clinical consensus and case analysis in dental implantology: a comparative study (2025)
+- Ensemble of Deep Learning Based Clinical Decision Support System for Chronic Kidney Disease Diagnosis in Medical Internet of Things Environment (2021)
+- A clinical decision support system optimising adjuvant chemotherapy for colorectal cancers by integrating deep learning and pathological staging markers: a development and validation study (2022)
+- Computing SARS-CoV-2 Infection Risk From Symptoms, Imaging, and Test Data: Diagnostic Model Development (2020)
+- Identifying Patients with Depression Using Free-text Clinical Documents (2015)
+- Supervised learning for infection risk inference using pathology data (2017)
+- A pre-trained language model for emergency department intervention prediction using routine physiological data and clinical narratives (2024)
+- Assessing clinician performance using a multi-modality clinical decision-support system for lung cancer prognostication (2025)
+
+
+=== Cluster 2 ===
+
+- Unsupervised Brain Lesion Segmentation Using Posterior Distributions Learned by Subspace-Based Generative Model (2026)
+- Automated identification of malignancy in whole-slide pathological images: identification of eyelid malignant melanoma in gigapixel pathological slides using deep learning (2020)
+- Development and Validation of an Automated Pipeline for the Detection of Monteggia Fracture Dislocations in Pediatric Radiographs (2026)
+- Advancing Visual Perception Through VCANet-Crossover Osprey Algorithm: Integrating Visual Technologies (2026)
+- A column-based deep learning method for the detection and quantification of atrophy associated with AMD in OCT scans (2021)
+- Survival prediction for oral tongue cancer patients via probabilistic genetic algorithm optimized neural network models (2020)
+- Robust multi-coil MRI reconstruction via self-supervised denoising (2025)
+- Deep Learning Segmentation of the Nucleus Basalis of Meynert on 3T MRI (2023)
+- Are we ready to tackle perceptual segmentation of natural scenes? (2026)
+- Toward Probabilistic Diagnosis and Understanding of Depression Based on Functional MRI Data Analysis with Logistic Group LASSO (2015)
+- Incorporating Uncertainty in Machine Learning Models to Improve Early Detection of Flavescence Dorée: A Demonstration of Applicability (2025)
+- Identifying significant structural factors associated with knee pain severity in patients with osteoarthritis using machine learning (2024)
+- Extracting the most discriminating functional connections in mild traumatic brain injury based on machine learning (2023)
+- Deep Learning Approach for Assessment of Bladder Cancer Treatment Response (2019)
+- Predictive Clinical Decision Support System Using Machine Learning and Imaging Biomarkers in Patients With Neurostimulation Therapy: A Pilot Study (2021)
+
+
+=== Cluster 3 ===
+
+- Ethical challenges of machine learning and deep learning algorithms (2019)
+- Benefits and Risks of Machine Learning Decision Support Systems (2017)
+- Benefits and Risks of Machine Learning Decision Support Systems (2017)
+- Benefits and Risks of Machine Learning Decision Support Systems-Reply (2017)
+- Benefits and Risks of Machine Learning Decision Support Systems (2017)
+
+
+=== Cluster 4 ===
+
+- Predictions of BuChE inhibitors using support vector machine and naive Bayesian classification techniques in drug discovery (2013)
+- Density Estimation Based on Mixtures of Gaussians for Perovskite Solar Cells Modeling (2026)
+- Medication use and risk of amyotrophic lateral sclerosis: using machine learning for an exposome-wide screen of a large clinical database (2024)
+- Quantitative structure retention relationship (QSRR) modelling for Analytes' retention prediction in LC-HRMS by applying different Machine Learning algorithms and evaluating their performance (2022)
+- Machine Learning-Enabled Design and Prediction of Protein Resistance on Self-Assembled Monolayers and Beyond (2021)
+- Defining individualized theta frequency for memory modulation: A machine learning approach across brain states and regions (2025)
+- Synergy of Small Antiviral Molecules on a Black-Phosphorus Nanocarrier: Machine Learning and Quantum Chemical Simulation Insights (2023)
+- Hypothesis Learning in Automated Experiment: Application to Combinatorial Materials Libraries (2022)
+- Optimized therapeutic drug monitoring: the role of machine learning models (2026)
+
+
+=== Cluster 5 ===
+
+- Leveraging probabilistic forecasts for dengue preparedness and control: The 2024 Dengue Forecasting Sprint in Brazil (2026)
+- Parsimonious kernel extreme learning machine in primal via Cholesky factorization (2016)
+- End-to-end machine-learning for high-gravity ammonia stripping: Bridging the gap between scientific research and user-friendly applications (2024)
+- A stacked machine learning model for multi-step ahead prediction of lake surface water temperature (2023)
+- Predicting performance traits in Murrah buffaloes using machine learning: a comparative approach (2025)
+- Can ensemble machine learning be used to predict the groundwater level dynamics of farmland under future climate: a 10-year study on Huaibei Plain (2022)
+- Predicting methane solubility in water and seawater by machine learning algorithms: Application to methane transport modeling (2021)
+- Characterizing seasonal changes in perfluoroalkyl substances in lake sediment by environmental magnetism from a machine learning perspective (2025)
+- Effective clinical decision support implementation using a multi filter and wrapper optimisation model for Internet of Things based healthcare data (2024)
