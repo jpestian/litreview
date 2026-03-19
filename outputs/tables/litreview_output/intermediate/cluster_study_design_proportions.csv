@@ -1,0 +1,23 @@
+cluster_name,Benchmark / Technical Evaluation,Diagnostic Accuracy Study,Implementation Study,Observational Study,Other,Retrospective Cohort Study,Review Paper,Simulation / Human Factors Study,Trial (Unspecified)
+"analysis, covid, 19, genes, based",0.0,0.032,0.032,0.0,0.935,0.0,0.0,0.0,0.0
+"approach, vitro, fertilization, pharmacology, intelligence",0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0
+"artificial, ai, intelligence, based, clinical",0.0,0.0,0.0,0.043,0.826,0.0,0.087,0.0,0.043
+"based, heart, failure, recognition, fusion",0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0
+"based, image, diagnosis, images, learning",0.042,0.042,0.042,0.0,0.875,0.0,0.0,0.0,0.0
+"cancer, analysis, genes, learning, machine",0.0,0.0,0.0,0.0,0.974,0.0,0.026,0.0,0.0
+"clinical, knowledge, support, decision, based",0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0
+"clinical, using, language, natural, processing",0.0,0.025,0.0,0.0,0.925,0.0,0.025,0.0,0.025
+"convolutional, neural, based, network, using",0.053,0.0,0.0,0.053,0.842,0.053,0.0,0.0,0.0
+"data, big, healthcare, care, digital",0.0,0.0,0.0,0.0,0.952,0.0,0.048,0.0,0.0
+"data, mining, based, healthcare, medicine",0.0,0.0,0.0,0.0,0.917,0.042,0.0,0.0,0.042
+"deep, learning, segmentation, risk, based",0.0,0.0,0.053,0.0,0.947,0.0,0.0,0.0,0.0
+"disease, using, alzheimer, network, deep",0.0,0.0,0.0,0.0,0.963,0.0,0.037,0.0,0.0
+"learning, deep, cardiac, intelligence, artificial",0.0,0.0,0.0,0.0,0.947,0.0,0.0,0.0,0.053
+"learning, deep, using, covid, 19",0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0
+"learning, machine, clinical, based, patients",0.0,0.0,0.04,0.0,0.96,0.0,0.0,0.0,0.0
+"learning, machine, prediction, patients, mortality",0.0,0.021,0.021,0.021,0.894,0.0,0.021,0.021,0.0
+"learning, reconstruction, deep, mri, image",0.0,0.0,0.083,0.0,0.833,0.0,0.0,0.0,0.083
+"network, cell, human, rna, remodeling",0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0
+"radiomics, radiogenomics, review, lung, cancer",0.0,0.0,0.0,0.0,0.917,0.0,0.083,0.0,0.0
+"radiotherapy, learning, planning, deep, cancer",0.0,0.0,0.0,0.0,0.913,0.0,0.043,0.043,0.0
+"segmentation, deep, learning, detection, brain",0.0,0.077,0.0,0.0,0.923,0.0,0.0,0.0,0.0

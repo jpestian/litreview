@@ -3,8 +3,13 @@ import requests
 import time
 import xml.etree.ElementTree as ET
 
-INPUT_FILE = "/home/jpestian/Downloads/csv-DecisionSu-set.csv"
-OUTPUT_DIR = "/home/jpestian/Downloads/test_pipeline_output"
+
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+INPUT_FILE = BASE_DIR / "data" / "csv-DecisionSu-set.csv"
+OUTPUT_DIR = "results/test_pipeline_output"
+
 
 OPENALEX = "https://api.openalex.org/works"
 PUBMED = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
