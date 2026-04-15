@@ -1,0 +1,12 @@
+(
+  "machine learning"[Title/Abstract] OR
+  "artificial intelligence"[Title/Abstract] OR
+  "deep learning"[Title/Abstract] OR
+  "natural language processing"[Title/Abstract]
+)
+AND
+(
+  "biomedical informatics"[Title/Abstract] OR
+  "clinical informatics"[Title/Abstract] OR
+  "medical informatics"[Title/Abstract]
+)

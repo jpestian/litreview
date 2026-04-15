@@ -1,0 +1,25 @@
+name: litreview-env
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - python=3.10
+  - numpy
+  - scipy
+  - pandas
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - ipython
+  - jupyterlab
+  - pip
+
+  - pip:
+      - sentence-transformers
+      - transformers
+      - torch
+      - hdbscan
+      - umap-learn
+      - aiohttp

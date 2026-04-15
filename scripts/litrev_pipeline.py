@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 
 import asyncio
 import aiohttp
@@ -14,22 +14,24 @@ import hdbscan
 import matplotlib.pyplot as plt
 from sentence_transformers import SentenceTransformer
 from sklearn.neighbors import NearestCentroid
+from sklearn.feature_extraction.text import TfidfVectorizer
 
-# ------------------------------------------------
-# PATH CONFIG
-# ------------------------------------------------
+# -----------------------------
+# CONFIG
+# -----------------------------
+BASE_DIR = Path(__file__).resolve().parent.parent
 
-SCRIPT_DIR = Path(__file__).resolve().parent
-OUTPUT_DIR = SCRIPT_DIR / "output"
-OUTPUT_DIR.mkdir(exist_ok=True)
+DATA_DIR = BASE_DIR / "data/raw"
+OUTPUT_DIR = BASE_DIR / "outputs/tables/litreview_output"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
-csv_files = sorted(
-    SCRIPT_DIR.glob("*.csv"),
-    key=lambda x: x.stat().st_mtime,
-    reverse=True
-)
+csv_files = sorted(DATA_DIR.glob("*.csv"), key=lambda x: x.stat().st_mtime, reverse=True)
+
+if not csv_files:
+    raise FileNotFoundError(f"No CSV files found in {DATA_DIR}")
 
 INPUT_FILE = csv_files[0]
+print(f"Using input file: {INPUT_FILE}")
 
 TOP_FOR_CLUSTERING = 500
 
@@ -38,9 +40,7 @@ TOP_FOR_CLUSTERING = 500
 # ------------------------------------------------
 
 def clean(v):
-    if not v:
-        return ""
-    return " ".join(str(v).split()).strip()
+    return " ".join(str(v).split()).strip() if v else ""
 
 def norm_doi(d):
     return re.sub(r"^https?://(dx\.)?doi\.org/","",clean(d)).lower()
@@ -53,41 +53,7 @@ def chunk(lst,n):
         yield lst[i:i+n]
 
 # ------------------------------------------------
-# STUDY DESIGN CLASSIFIER
-# ------------------------------------------------
-
-def classify_design(text):
-
-    t=text.lower()
-
-    if "randomized controlled trial" in t:
-        return "RCT"
-
-    if "cluster randomized" in t:
-        return "Cluster RCT"
-
-    if "diagnostic accuracy" in t:
-        return "Diagnostic Accuracy"
-
-    if "retrospective" in t:
-        return "Retrospective Cohort"
-
-    if "prospective" in t:
-        return "Prospective Cohort"
-
-    if "implementation" in t:
-        return "Implementation"
-
-    if "simulation" in t or "usability" in t:
-        return "Simulation"
-
-    if "systematic review" in t or "meta-analysis" in t:
-        return "Review"
-
-    return "Other"
-
-# ------------------------------------------------
-# OPENALEX CITATIONS
+# OPENALEX
 # ------------------------------------------------
 
 OPENALEX_BASE="https://api.openalex.org/works"
@@ -95,12 +61,9 @@ OPENALEX_BASE="https://api.openalex.org/works"
 async def openalex_batch(session,batch):
 
     filters=[]
-
     for p in batch:
-
         doi=norm_doi(p["doi"])
         pmid=norm_pmid(p["pmid"])
-
         if doi:
             filters.append(f"doi:{doi}")
         elif pmid:
@@ -111,26 +74,21 @@ async def openalex_batch(session,batch):
 
     url=f"{OPENALEX_BASE}?filter={'|'.join(filters)}&per-page=200"
 
-    async with session.get(url) as r:
+    headers = {"Accept-Encoding": "gzip, deflate"}
 
+    async with session.get(url, headers=headers) as r:
         data=await r.json()
 
     works=data.get("results",[])
-
     citation_map={}
 
     for w in works:
-
         doi_raw=w.get("doi","")
-
         if doi_raw:
             citation_map[norm_doi(doi_raw)]=w.get("cited_by_count",0)
 
     for p in batch:
-
-        p["cited_by_count"]=citation_map.get(
-            norm_doi(p["doi"]),0
-        )
+        p["cited_by_count"]=citation_map.get(norm_doi(p["doi"]),0)
 
     return batch
 
@@ -139,35 +97,27 @@ async def get_citations(papers):
     async with aiohttp.ClientSession() as session:
 
         tasks=[]
-
         for b in chunk(papers,50):
             tasks.append(openalex_batch(session,b))
 
         results=[]
-
         for coro in asyncio.as_completed(tasks):
             results.extend(await coro)
 
         return results
 
 # ------------------------------------------------
-# PUBMED ABSTRACTS
+# PUBMED
 # ------------------------------------------------
 
 PUBMED_EFETCH="https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi"
 
 async def get_pubmed_abstracts(pmids):
 
-    params={
-        "db":"pubmed",
-        "id":",".join(pmids),
-        "retmode":"xml"
-    }
+    params={"db":"pubmed","id":",".join(pmids),"retmode":"xml"}
 
     async with aiohttp.ClientSession() as session:
-
         async with session.get(PUBMED_EFETCH,params=params) as r:
-
             xml=await r.text()
 
     abstracts={}
@@ -178,14 +128,8 @@ async def get_pubmed_abstracts(pmids):
         return abstracts
 
     for art in root.findall(".//PubmedArticle"):
-
         pmid=art.findtext(".//PMID")
-
-        parts=[]
-
-        for a in art.findall(".//AbstractText"):
-            parts.append("".join(a.itertext()))
-
+        parts=[ "".join(a.itertext()) for a in art.findall(".//AbstractText") ]
         abstracts[pmid]=" ".join(parts)
 
     return abstracts
@@ -195,51 +139,53 @@ async def get_pubmed_abstracts(pmids):
 # ------------------------------------------------
 
 def embed(texts):
-
     model = SentenceTransformer("all-MiniLM-L6-v2")
-
-    emb = model.encode(
-        texts,
-        convert_to_numpy=True,
-        normalize_embeddings=True
-    )
-
-    return emb
+    return model.encode(texts, convert_to_numpy=True, normalize_embeddings=True)
 
 # ------------------------------------------------
 # CLUSTERING
 # ------------------------------------------------
 
 def cluster(emb):
-
-    reducer = umap.UMAP(
-        n_neighbors=15,
-        min_dist=0.1,
-        random_state=42
-    )
-
+    reducer = umap.UMAP(n_neighbors=15, min_dist=0.1, random_state=42)
     coords = reducer.fit_transform(emb)
 
-    clusterer = hdbscan.HDBSCAN(
-        min_cluster_size=5
-    )
-
+    clusterer = hdbscan.HDBSCAN(min_cluster_size=5)
     labels = clusterer.fit_predict(coords)
 
-    # Fix noise cluster
     if -1 in labels:
-
         mask = labels != -1
-
         clf = NearestCentroid()
-
         clf.fit(coords[mask], labels[mask])
-
         noise = np.where(labels==-1)[0]
-
         labels[noise]=clf.predict(coords[noise])
 
     return labels, coords
+
+# ------------------------------------------------
+# AUTO LABELING
+# ------------------------------------------------
+
+def generate_cluster_labels(df, n_terms=5):
+
+    labels = {}
+
+    for c in sorted(df["cluster"].unique()):
+
+        subset = df[df["cluster"] == c]
+        texts = (subset["title"] + " " + subset["abstract"]).fillna("")
+
+        vectorizer = TfidfVectorizer(stop_words="english", max_features=1000)
+        X = vectorizer.fit_transform(texts)
+
+        scores = X.sum(axis=0).A1
+        terms = vectorizer.get_feature_names_out()
+
+        top_terms = [terms[i] for i in scores.argsort()[::-1][:n_terms]]
+
+        labels[c] = ", ".join(top_terms)
+
+    return labels
 
 # ------------------------------------------------
 # MAIN
@@ -249,34 +195,22 @@ def main():
 
     rows=list(csv.DictReader(open(INPUT_FILE)))
 
-    papers=[]
-
-    for r in rows:
-
-        papers.append({
-            "pmid":norm_pmid(r.get("PMID")),
-            "title":clean(r.get("Title")),
-            "year":clean(r.get("Publication Year")),
-            "doi":norm_doi(r.get("DOI")),
-            "cited_by_count":0
-        })
+    papers=[{
+        "pmid":norm_pmid(r.get("PMID")),
+        "title":clean(r.get("Title")),
+        "year":clean(r.get("Publication Year")),
+        "doi":norm_doi(r.get("DOI")),
+        "cited_by_count":0
+    } for r in rows]
 
     print("Fetching citations...")
-
     papers=asyncio.run(get_citations(papers))
 
-    papers=sorted(
-        papers,
-        key=lambda x:x["cited_by_count"],
-        reverse=True
-    )
-
+    papers=sorted(papers,key=lambda x:x["cited_by_count"],reverse=True)
     top500=papers[:TOP_FOR_CLUSTERING]
 
     print("Fetching abstracts...")
-
     pmids=[p["pmid"] for p in top500]
-
     abstracts=asyncio.run(get_pubmed_abstracts(pmids))
 
     for p in top500:
@@ -284,87 +218,27 @@ def main():
 
     texts=[p["title"]+" "+p["abstract"] for p in top500]
 
-    print("Embedding papers...")
-
+    print("Embedding...")
     emb=embed(texts)
 
-    print("Clustering...")
+    np.save(OUTPUT_DIR / f"top{TOP_FOR_CLUSTERING}_embeddings.npy", emb)
 
+    print("Clustering...")
     labels,coords=cluster(emb)
 
     df=pd.DataFrame(top500)
-
     df["cluster"]=labels
 
-    df.to_csv(
-        OUTPUT_DIR/"clustered_papers.csv",
-        index=False
-    )
+    # AUTO LABELS
+    cluster_labels = generate_cluster_labels(df)
+    df["cluster_label"] = df["cluster"].map(cluster_labels)
 
-    # ------------------------------------------------
-    # SHOW CLUSTERS
-    # ------------------------------------------------
+    pd.DataFrame.from_dict(cluster_labels, orient="index", columns=["label"]) \
+        .to_csv(OUTPUT_DIR / "cluster_labels.csv")
 
-    print("\nTop titles per cluster\n")
-
-    for c in sorted(df.cluster.unique()):
-
-        print("\nCluster",c)
-
-        sub=df[df.cluster==c].head(10)
-
-        for t in sub.title:
-            print(" -",t)
-
-    # ------------------------------------------------
-    # STUDY DESIGN TABLE
-    # ------------------------------------------------
-
-    df["study_design"]=df["abstract"].apply(classify_design)
-
-    table=pd.crosstab(
-        df["cluster"],
-        df["study_design"]
-    )
-
-    table.to_csv(
-        OUTPUT_DIR/"cluster_study_design_table.csv"
-    )
-
-    print("\nStudy Design Table:\n")
-    print(table)
-
-    # ------------------------------------------------
-    # LITERATURE MAP
-    # ------------------------------------------------
-
-    plt.figure(figsize=(10,8))
-
-    plt.scatter(
-        coords[:,0],
-        coords[:,1],
-        c=df.cluster,
-        cmap="tab10",
-        s=60
-    )
-
-    plt.title("Semantic Map of Clinical Decision Support Literature")
-
-    plt.xticks([])
-    plt.yticks([])
-
-    plt.savefig(
-        OUTPUT_DIR/"literature_map.png",
-        dpi=300
-    )
-
-    plt.savefig(
-        OUTPUT_DIR/"literature_map.pdf"
-    )
+    df.to_csv(OUTPUT_DIR/"clustered_papers.csv",index=False)
 
     print("\nOutputs written to:",OUTPUT_DIR)
-
-# ------------------------------------------------
 
 if __name__=="__main__":
     main()

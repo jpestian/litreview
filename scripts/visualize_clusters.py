@@ -7,49 +7,50 @@ import matplotlib.pyplot as plt
 from pathlib import Path
 
 # =========================
-# FILE PATHS
+# PATH CONFIG
 # =========================
 
-OUTPUT_DIR = Path("output")
+BASE_DIR = Path(__file__).resolve().parent.parent
+OUTPUT_DIR = BASE_DIR / "results" / "litreview_output"
 
-EMBED_FILE = OUTPUT_DIR / "top100_embeddings.npy"
-META_FILE = OUTPUT_DIR / "literature_clusters.csv"
+TOP_N = 500
 
-FIG_FILE = OUTPUT_DIR / "literature_map.png"
-
-# =========================
-# CLUSTER NAMES
-# =========================
-
-CLUSTER_NAMES = {
-0: "Clinical Decision Support Systems",
-1: "Machine Learning Diagnostic Models",
-2: "Probabilistic Diagnostic Reasoning",
-3: "Implementation and Workflow Integration",
-4: "Evaluation Methods and Clinical Trials",
-5: "Human Factors and Clinical Reasoning"
-}
+EMBED_FILE = OUTPUT_DIR / f"top{TOP_N}_embeddings.npy"
+META_FILE = OUTPUT_DIR / "clustered_papers.csv"
+LABEL_FILE = OUTPUT_DIR / "cluster_labels.csv"
+FIG_FILE = OUTPUT_DIR / "literature_map_labeled.png"
 
 # =========================
 # LOAD DATA
 # =========================
 
-print("Loading embeddings...")
+if not EMBED_FILE.exists():
+    raise FileNotFoundError(f"Missing embeddings: {EMBED_FILE}")
+
+if not META_FILE.exists():
+    raise FileNotFoundError(f"Missing metadata: {META_FILE}")
+
+if not LABEL_FILE.exists():
+    raise FileNotFoundError(f"Missing cluster labels: {LABEL_FILE}")
+
+print("Loading data...")
+
 emb = np.load(EMBED_FILE)
-
-print("Loading metadata...")
 df = pd.read_csv(META_FILE)
-
-df["cluster_name"] = df["cluster"].map(CLUSTER_NAMES)
+labels_df = pd.read_csv(LABEL_FILE, index_col=0)
 
 # =========================
-# YEAR RANGE
+# YEAR RANGE (AUTO TITLE)
 # =========================
 
-year_min = int(df["year"].min())
-year_max = int(df["year"].max())
+years = pd.to_numeric(df["year"], errors="coerce").dropna()
 
-title = f"Semantic Map of Clinical Decision Support Literature ({year_min}-{year_max})"
+if len(years) > 0:
+    year_min = int(years.min())
+    year_max = int(years.max())
+    title = f"Semantic Map of Clinical Decision Support Literature ({year_min}–{year_max})"
+else:
+    title = "Semantic Map of Clinical Decision Support Literature"
 
 # =========================
 # UMAP PROJECTION
@@ -66,48 +67,48 @@ reducer = umap.UMAP(
 coords = reducer.fit_transform(emb)
 
 # =========================
+# SORT CLUSTERS BY SIZE
+# =========================
+
+cluster_sizes = df["cluster"].value_counts()
+clusters = cluster_sizes.index.tolist()
+
+# =========================
 # PLOT
 # =========================
 
-plt.figure(figsize=(11,9))
+plt.figure(figsize=(11, 9))
 
-clusters = sorted(df["cluster"].unique())
+for rank, c in enumerate(clusters, start=1):
 
-for c in clusters:
-
-    name = CLUSTER_NAMES.get(c, f"Cluster {c}")
+    name = labels_df.loc[c, "label"] if c in labels_df.index else f"Cluster {c}"
 
     subset = df[df["cluster"] == c]
-
+    idx = subset.index.to_numpy()
     count = len(subset)
 
-    label = f"{name} ({count})"
-
-    idx = subset.index
+    label = f"{rank}. {name} ({count})"
 
     plt.scatter(
-        coords[idx,0],
-        coords[idx,1],
+        coords[idx, 0],
+        coords[idx, 1],
         s=80,
         label=label
     )
 
 plt.title(title)
-
-# remove meaningless axes
 plt.xticks([])
 plt.yticks([])
 
 plt.legend(
     title="Research Themes",
-    bbox_to_anchor=(1.05,1),
+    bbox_to_anchor=(1.05, 1),
     loc="upper left"
 )
 
 plt.tight_layout()
-
 plt.savefig(FIG_FILE, dpi=300)
 
-print("Saved:", FIG_FILE)
+print(f"Saved figure: {FIG_FILE}")
 
 plt.show()

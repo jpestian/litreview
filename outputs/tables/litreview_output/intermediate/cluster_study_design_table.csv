@@ -1,0 +1,23 @@
+cluster_name,Benchmark / Technical Evaluation,Diagnostic Accuracy Study,Implementation Study,Observational Study,Other,Retrospective Cohort Study,Review Paper,Simulation / Human Factors Study,Trial (Unspecified)
+"analysis, covid, 19, genes, based",0,1,1,0,29,0,0,0,0
+"approach, vitro, fertilization, pharmacology, intelligence",0,0,0,0,13,0,0,0,0
+"artificial, ai, intelligence, based, clinical",0,0,0,1,19,0,2,0,1
+"based, heart, failure, recognition, fusion",0,0,0,0,13,0,0,0,0
+"based, image, diagnosis, images, learning",1,1,1,0,21,0,0,0,0
+"cancer, analysis, genes, learning, machine",0,0,0,0,38,0,1,0,0
+"clinical, knowledge, support, decision, based",0,0,0,0,14,0,0,0,0
+"clinical, using, language, natural, processing",0,1,0,0,37,0,1,0,1
+"convolutional, neural, based, network, using",1,0,0,1,16,1,0,0,0
+"data, big, healthcare, care, digital",0,0,0,0,20,0,1,0,0
+"data, mining, based, healthcare, medicine",0,0,0,0,22,1,0,0,1
+"deep, learning, segmentation, risk, based",0,0,1,0,18,0,0,0,0
+"disease, using, alzheimer, network, deep",0,0,0,0,26,0,1,0,0
+"learning, deep, cardiac, intelligence, artificial",0,0,0,0,18,0,0,0,1
+"learning, deep, using, covid, 19",0,0,0,0,32,0,0,0,0
+"learning, machine, clinical, based, patients",0,0,1,0,24,0,0,0,0
+"learning, machine, prediction, patients, mortality",0,1,1,1,42,0,1,1,0
+"learning, reconstruction, deep, mri, image",0,0,1,0,10,0,0,0,1
+"network, cell, human, rna, remodeling",0,0,0,0,10,0,0,0,0
+"radiomics, radiogenomics, review, lung, cancer",0,0,0,0,11,0,1,0,0
+"radiotherapy, learning, planning, deep, cancer",0,0,0,0,21,0,1,1,0
+"segmentation, deep, learning, detection, brain",0,1,0,0,12,0,0,0,0
