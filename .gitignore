@@ -1,33 +1,106 @@
-# -------------------------
+# ===========================================
+# Pestian Lab — Standard .gitignore
+# ===========================================
+
+# -------------------------------------------
+# Data files — do not commit large datasets
+# -------------------------------------------
+data/raw/*.csv
+data/raw/*.tsv
+data/raw/*.json
+data/raw/*.txt
+data/raw/*.xml
+data/raw/*.parquet
+data/raw/*.feather
+data/raw/*.pkl
+data/raw/*.pickle
+
+# Embeddings and arrays
+data/embeddings/*.npy
+data/embeddings/*.npz
+data/processed/*.npy
+data/processed/*.npz
+
+# Processed data
+data/processed/*.parquet
+data/processed/*.feather
+data/processed/*.pkl
+data/processed/*.pickle
+data/processed/*.csv
+
+# -------------------------------------------
+# Models — do not commit weights/checkpoints
+# -------------------------------------------
+models/checkpoints/*
+models/trained/*
+!models/checkpoints/.gitkeep
+!models/trained/.gitkeep
+
+# -------------------------------------------
+# Outputs — keep figures, ignore large files
+# -------------------------------------------
+outputs/results/*.npy
+outputs/results/*.npz
+outputs/results/*.pkl
+outputs/results/*.pickle
+
+# -------------------------------------------
+# Jupyter
+# -------------------------------------------
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# -------------------------------------------
 # Python
-# -------------------------
+# -------------------------------------------
 __pycache__/
-*.pyc
+*.py[cod]
 *.pyo
 *.pyd
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+*.so
 
-# -------------------------
-# Virtual environments
-# -------------------------
+# -------------------------------------------
+# Conda / virtual environments
+# -------------------------------------------
 .env
 .venv
 env/
 venv/
+*.conda
 
-# -------------------------
-# Jupyter
-# -------------------------
-.ipynb_checkpoints/
+# -------------------------------------------
+# Logs
+# -------------------------------------------
+logs/*.log
+logs/*.out
+logs/*.err
 
-# -------------------------
-# OS junk
-# -------------------------
+# -------------------------------------------
+# OS
+# -------------------------------------------
 .DS_Store
 Thumbs.db
+desktop.ini
 
-# -------------------------
-# Logs / temp
-# -------------------------
-*.log
-*.tmp
-*.cache
+# -------------------------------------------
+# Editors
+# -------------------------------------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# -------------------------------------------
+# Secrets
+# -------------------------------------------
+.env
+*.key
+*.pem
+secrets/
