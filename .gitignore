@@ -1,106 +1,28 @@
-# ===========================================
-# Pestian Lab — Standard .gitignore
-# ===========================================
+datasets/
+artifacts/
+tmp/
 
-# -------------------------------------------
-# Data files — do not commit large datasets
-# -------------------------------------------
-data/raw/*.csv
-data/raw/*.tsv
-data/raw/*.json
-data/raw/*.txt
-data/raw/*.xml
-data/raw/*.parquet
-data/raw/*.feather
-data/raw/*.pkl
-data/raw/*.pickle
+# ML / research files
+*.parquet
+*.npy
+*.pt
+*.ckpt
+*.model
 
-# Embeddings and arrays
-data/embeddings/*.npy
-data/embeddings/*.npz
-data/processed/*.npy
-data/processed/*.npz
+# Exceptions — commit raw data
+!data/raw/*.csv
+!data/raw/*.tsv
+!data/raw/*.json
+!data/raw/*.txt
+!data/raw/*.parquet
+!data/raw/*.npy
 
-# Processed data
-data/processed/*.parquet
-data/processed/*.feather
-data/processed/*.pkl
-data/processed/*.pickle
-data/processed/*.csv
-
-# -------------------------------------------
-# Models — do not commit weights/checkpoints
-# -------------------------------------------
-models/checkpoints/*
-models/trained/*
-!models/checkpoints/.gitkeep
-!models/trained/.gitkeep
-
-# -------------------------------------------
-# Outputs — keep figures, ignore large files
-# -------------------------------------------
-outputs/results/*.npy
-outputs/results/*.npz
-outputs/results/*.pkl
-outputs/results/*.pickle
-
-# -------------------------------------------
-# Jupyter
-# -------------------------------------------
-.ipynb_checkpoints/
-*/.ipynb_checkpoints/
-*.ipynb_checkpoints
-
-# -------------------------------------------
-# Python
-# -------------------------------------------
+# python
 __pycache__/
-*.py[cod]
-*.pyo
-*.pyd
-*.egg
-*.egg-info/
-dist/
-build/
-.eggs/
-*.so
+*.pyc
 
-# -------------------------------------------
-# Conda / virtual environments
-# -------------------------------------------
-.env
-.venv
-env/
-venv/
-*.conda
+# notebooks
+.ipynb_checkpoints/
 
-# -------------------------------------------
-# Logs
-# -------------------------------------------
-logs/*.log
-logs/*.out
-logs/*.err
-
-# -------------------------------------------
-# OS
-# -------------------------------------------
+# system files
 .DS_Store
-Thumbs.db
-desktop.ini
-
-# -------------------------------------------
-# Editors
-# -------------------------------------------
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# -------------------------------------------
-# Secrets
-# -------------------------------------------
-.env
-*.key
-*.pem
-secrets/
